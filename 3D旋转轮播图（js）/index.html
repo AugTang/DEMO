@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			text-decoration: none;
+		}
+		.box{
+			position: relative;
+			margin: 20px auto;
+			width: 1066px;
+		}
+		.box .list{
+			list-style: none;
+			position: relative;
+		}
+		.box .list>li{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			transition: all .4s;
+		}
+		.box .list>li img{width: 100%}
+		.box .list>li.li0{
+			width: 600px;
+			left: 200px;
+			top: 100px;
+			opacity: 1;
+			z-index: 10;
+		}
+		.box .list>li.li1{
+			width: 500px;
+			top: 50px;
+			opacity: .8;
+			z-index: 5;
+		}
+		.box .list>li.li2{
+			width: 300px;
+			left: 100px;
+			opacity: .3;
+			z-index: 2;
+		}
+		.box .list>li.li3{
+			width: 300px;
+			left: 700px;
+			opacity: .3;
+			z-index: 2;
+		}
+		.box .list>li.li4{
+			width: 500px;
+			top: 50px;
+			left: 600px;
+			opacity: .8;
+			z-index: 5;
+		}
+		.box .arrow{
+			position: relative;
+		}
+		.box .arrow a{
+			color: #000;
+			font-size: 30px;
+		}
+		.box .arrow .prev{
+			position: absolute;
+			left: -80px;
+			top: 240px;
+		}
+		.box .arrow .next{
+			position: absolute;
+			right: -80px;
+			top: 240px;
+		}
+	</style>
+</head>
+<body>
+<div class="box" id="box">
+	<ul class="list">
+		<li class="li0"><img src="image/9.7.4.jpg"></li>
+		<li class="li1"><img src="image/10.7.1-1.jpg"></li>
+		<li class="li2"><img src="image/10.9.4.jpg"></li>
+		<li class="li3"><img src="image/3.11.1.jpg"></li>
+		<li class="li4"><img src="image/14.5.2.jpg"></li>
+	</ul>
+	<div class="arrow">
+		<a class="prev" href="javascript:;">&lt;</a>
+		<a class="next" href="javascript:;">&gt;</a>
+	</div>
+</div>
+<script type="text/javascript">
+	var oBox = document.getElementById('box');
+		// console.log(oBox);
+	var oUl=oBox.children[0];//获取box下的子集Ul标签；
+	var oLi=oUl.children;    //获取Ul下的自己li标签
+	var oArrow=oBox.children[1];//获取box下的子集：arrow；
+	var oPrev=oArrow.children[0];//获取arrow下的子集：prev，与next（即左右箭头按钮）；
+	var oNext=oArrow.children[1];
+
+	oPrev.onclick=function(){
+		for(var i=0;i<oLi.length;i++){
+			//得到类名的最后一个数字，并且转换成数字类型；
+			var classNum=parseInt(oLi[i].className.slice(-1));//将li下所有的class类，装换成整数;
+			if(classNum-1<0){
+				oLi[i].className="li"+(oLi.length-1);
+			}else{
+				oLi[i].className="li"+(classNum-1);
+			}
+		}
+	}
+	oNext.onclick=function(){//往右边方向
+		for(var i=0;i<oLi.length;i++){//遍历li;
+			var classNum=parseInt(oLi[i].className.slice(-1));//将li下class类的最后一位转换成整数;
+			if(classNum+1>(oLi.length-1)){//判断：
+				oLi[i].className="li0";
+			}else{
+				oLi[i].className="li"+(classNum+1);
+			}
+		}
+	}
+</script>
